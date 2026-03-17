@@ -1,5 +1,5 @@
 import { degToCompass } from "../services/converters";
-import { getTime } from "../services/helpers";
+import { getTimeFromISO } from "../services/helpers";
 import { MetricsCard } from "./MetricsCard";
 import styles from "./MetricsBox.module.css";
 
@@ -32,13 +32,13 @@ export const MetricsBox = ({ weatherData }) => {
       <MetricsCard
         title={"Lever du soleil"}
         iconSrc={"/icons/sunrise.png"}
-        metric={getTime(weatherData.daily.sunrise[0])}
+        metric={getTimeFromISO(weatherData.daily.sunrise[0])}
         unit={""}
       />
       <MetricsCard
         title={"Coucher du soleil"}
         iconSrc={"/icons/sunset.png"}
-        metric={getTime(weatherData.daily.sunset[0])}
+        metric={getTimeFromISO(weatherData.daily.sunset[0])}
         unit={""}
       />
     </div>
