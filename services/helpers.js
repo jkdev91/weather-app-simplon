@@ -1,5 +1,11 @@
-//Open-Meteo retourne date au format "2026-03-15T14:30"
-export const getTime = (isoString) => isoString.split("T")[1];
+// On utilise l'heure réel de l'appareil au lieu de l'heure de ope meteo
+export const getTime = () => {
+  return new Date().toLocaleTimeString("fr-FR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+};
 
 //en français pour le contexte France !
 export const getWeekDay = (isoString) => {
@@ -29,7 +35,7 @@ export const getDescription = (code) => {
 };
 
 export const getIconName = (code, isDay = true) => {
-  const suffix = isDay ? "d" : "n";
+  const suffix = isDay === 1 ? "d" : "n";
 
   if (code === 0) return `01${suffix}`; // ciel dégagé
   if (code <= 2) return `02${suffix}`; // partiellement nuageux
