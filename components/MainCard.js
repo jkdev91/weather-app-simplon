@@ -1,13 +1,11 @@
 import Image from "next/image";
-import { ctoF } from "../services/converters";
 import styles from "./MainCard.module.css";
+import { getDescription, getIconName } from "../services/helpers";
 
 export const MainCard = ({
   city,
   country,
-  description,
-  iconName,
-  unitSystem,
+
   weatherData,
 }) => {
   return (
@@ -15,25 +13,22 @@ export const MainCard = ({
       <h1 className={styles.location}>
         {city}, {country}
       </h1>
-      <p className={styles.description}>{description}</p>
+      <p className={styles.description}>
+        {getDescription(weatherData.current.weather_code)}
+      </p>
       <Image
         width="300px"
         height="300px"
-        src={`/icons/${iconName}.svg`}
+        src={`/icons/${getIconName(weatherData.current.weather_code, weatherData.current.is_day)}.svg`}
         alt="weatherIcon"
       />
       <h1 className={styles.temperature}>
-        {unitSystem == "metric"
-          ? Math.round(weatherData.main.temp)
-          : Math.round(ctoF(weatherData.main.temp))}
-        °{unitSystem == "metric" ? "C" : "F"}
+        {/* Open-Meteo, système métrique */}
+        {Math.round(weatherData.current.temperature_2m)}°C
       </h1>
       <p>
-        Feels like{" "}
-        {unitSystem == "metric"
-          ? Math.round(weatherData.main.feels_like)
-          : Math.round(ctoF(weatherData.main.feels_like))}
-        °{unitSystem == "metric" ? "C" : "F"}
+        {/* Open-Meteo, en français */}
+        Ressenti {Math.round(weatherData.current.apparent_temperature)}°C
       </p>
     </div>
   );
