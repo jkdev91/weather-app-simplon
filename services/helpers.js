@@ -7,6 +7,9 @@ export const getTime = () => {
   });
 };
 
+//heure depuis ISO string pour lever/coucher soleil
+export const getTimeFromISO = (isoString) => isoString.split("T")[1];
+
 //en français pour le contexte France !
 export const getWeekDay = (isoString) => {
   const weekday = [
